@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SessionList from "./components/SessionList";
+import SessionForm from "./components/SessionForm";
 
 function App() {
   const [sessions, setSessions] = useState([]);
@@ -11,9 +12,14 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
+  const handleSessionCreated = (newSession) => {
+    setSessions((prev) => [...prev, newSession]);
+  };
+
   return (
     <div>
       <h1>StudySprint</h1>
+      <SessionForm onSessionCreated={handleSessionCreated} />
       <SessionList sessions={sessions} />
     </div>
   );
