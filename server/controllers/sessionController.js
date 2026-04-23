@@ -11,7 +11,19 @@ const createSession = async (req, res) => {
 
 const getSessions = async (req, res) => {
   try {
-    const sessions = await Session.find();
+    const filter = {};
+    if(req.query.focusLevel){
+      filter.focusLevel = Number(req.query.focusLevel);
+    }
+    
+    if(req.query.duration){
+      filter.duration = Number (req.query.duration);
+    }
+
+    if(req.query.userId){
+      filter.userId = req.query.userId;
+    }
+    const sessions = await Session.find(filter);
     res.json(sessions);
   } catch (error) {
     res.status(500).json({ error: error.message });
