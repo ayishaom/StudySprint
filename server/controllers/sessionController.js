@@ -30,7 +30,7 @@ const updateSession = async (req, res) => {
     }
     res.json(session);
   } catch (error){
-    res.status(400).json({error: error.message});
+    res.status(500).json({error: error.message});
   }
 
 };
@@ -44,14 +44,28 @@ const deleteSession = async (req, res) => {
     }
     res.json({message:"Session deleted"});
   }catch(error){
-    return res.status(400).json({error: error.message});
+    return res.status(500).json({error: error.message});
   }
 
 };
+
+const getPopulatedSession = async (req,res) =>{
+  try{
+    const sessions = await Session.find()
+    .populate("userId", "name email studyGoal")
+    .populate("subjectId", "name difficultyLevel");
+
+    res.json(sessions);
+  }catch(error){
+    res.status(500).json({error: error.message});
+  }
+}
+
 
 module.exports = {
   createSession,
   getSessions,
   updateSession,
   deleteSession,
+  getPopulatedSession,
 };

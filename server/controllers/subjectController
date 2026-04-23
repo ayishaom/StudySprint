@@ -1,0 +1,17 @@
+const Session = require("../models/Session");
+
+const getSessionsBySubject = async (req, res) => {
+  try {
+    const sessions = await Session.find({ subjectId: req.params.id })
+      .populate("userId", "name email")
+      .populate("subjectId", "name difficultyLevel");
+
+    res.json(sessions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = {
+  getSessionsBySubject,
+};
