@@ -18,9 +18,36 @@ const getSessions = async (req, res) => {
   }
 };
 
-const updateSession = async (req, res) => {};
+const updateSession = async (req, res) => {
+  try{
+    const session = await Session.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    if (!session) {
+      return res.status(404).json({error: "Session not found"});
+    }
+    res.json(session);
+  } catch (error){
+    res.status(400).json({error: error.message});
+  }
 
-const deleteSession = async (req, res) => {};
+};
+
+const deleteSession = async (req, res) => {
+  try{
+    const session = await Session.findByIdAndDelete(req.params.id);
+
+    if (!session){
+      return res.status(404).json({error: "Session not found"});
+    }
+    res.json({message:"Session deleted"});
+  }catch(error){
+    return res.status(400).json({error: error.message});
+  }
+
+};
 
 module.exports = {
   createSession,
