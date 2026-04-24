@@ -1,6 +1,6 @@
 import SessionRow from "./SessionRow";
 
-function SessionList({ sessions }) {
+function SessionList({ sessions, onDelete, onEdit}) {
   return (
     <div>
       <h2>Study Sessions</h2>
@@ -13,12 +13,18 @@ function SessionList({ sessions }) {
             <th>Focus</th>
             <th>Energy</th>
             <th>Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
           {sessions.map((session) => (
-            <SessionRow key={session._id} session={session} />
+            <SessionRow 
+            key={session._id} 
+            session={session}
+            onDelete={onDelete} 
+            onEdit={onEdit}
+            />
           ))}
         </tbody>
       </table>

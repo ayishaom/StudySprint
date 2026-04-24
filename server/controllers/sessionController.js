@@ -35,7 +35,7 @@ const updateSession = async (req, res) => {
     const session = await Session.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true }
+      { returnDocument: "after" }
     );
     if (!session) {
       return res.status(404).json({error: "Session not found"});
