@@ -4,13 +4,36 @@ import SessionForm from "./components/SessionForm";
 
 function App() {
   const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/sessions")
-      .then((res) => res.json())
-      .then((data) => setSessions(data))
-      .catch((err) => console.error(err));
-  }, []);
+ useEffect(() => {
+  const fetchSessions = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const res = await fetch("http://localhost:5000/api/sessions");
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to fetch sessions");
+      }
+
+      setSessions(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchSessions();
+
+  const interval = setInterval(fetchSessions, 5000);
+
+  return () => clearInterval(interval);
+}, []);
 
   const handleSessionCreated = (newSession) => {
     setSessions((prev) => [...prev, newSession]);
@@ -79,16 +102,21 @@ const handleEditSession = async (session) => {
 };
 
   return (
-    <div>
-      <h1>StudySprint</h1>
-      <SessionForm onSessionCreated={handleSessionCreated} />
-      <SessionList 
+  <div>
+    <h1>StudySprint</h1>
+
+    {loading && <p>Loading sessions...</p>}
+    {error && <p style={{ color: "red" }}>Error: {error}</p>}
+
+    <SessionForm onSessionCreated={handleSessionCreated} />
+
+    <SessionList
       sessions={sessions}
-      onDelete={handleDeleteSession} 
+      onDelete={handleDeleteSession}
       onEdit={handleEditSession}
-       />
-    </div>
-  );
+    />
+  </div>
+);
 }
 
 export default App;
