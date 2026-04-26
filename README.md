@@ -103,6 +103,7 @@ Replace ID inputs with dropdown selections
 Add authentication
 Add analytics (e.g., total study time)
 Improve UI design
+
 Author
 
 Ayisha Omer
