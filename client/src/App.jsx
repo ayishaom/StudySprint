@@ -105,7 +105,7 @@ const handleEditSession = async (session) => {
   <div>
     <h1>StudySprint</h1>
 
-    {loading && <p>Loading sessions...</p>}
+    {loading && sessions.length === 0 && <p>Loading sessions...</p>}
     {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
     <SessionForm onSessionCreated={handleSessionCreated} />
