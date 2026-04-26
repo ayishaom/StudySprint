@@ -40,11 +40,46 @@ const seedData = async () => {
 
     // Create sessions (linked to users + subjects)
     await Session.insertMany([
-      { userId: users[0]._id, subjectId: subjects[0]._id, duration: 60, focusLevel: 4, energyLevel: 3, date: new Date() },
-      { userId: users[1]._id, subjectId: subjects[1]._id, duration: 90, focusLevel: 5, energyLevel: 4, date: new Date() },
-      { userId: users[2]._id, subjectId: subjects[2]._id, duration: 45, focusLevel: 3, energyLevel: 2, date: new Date() },
-      { userId: users[3]._id, subjectId: subjects[3]._id, duration: 120, focusLevel: 5, energyLevel: 5, date: new Date() },
-      { userId: users[4]._id, subjectId: subjects[4]._id, duration: 30, focusLevel: 2, energyLevel: 2, date: new Date() }
+      { userId: users[0]._id,
+        subjectId: subjects[0]._id,
+        goal:"Review networking lecture slides",
+        duration: 60,
+        focusLevel: 4,
+        energyLevel: 3,
+        date: new Date()
+      } ,
+      { userId: users[1]._id,
+        subjectId: subjects[1]._id,
+        goal:"Practice JavaScript functions",
+        duration: 90, 
+        focusLevel: 5,
+        energyLevel: 4, 
+        date: new Date()
+      },
+      { userId: users[2]._id, 
+        subjectId: subjects[2]._id,
+        goal:"Finish database relationship exercises", 
+        duration: 45, 
+        focusLevel: 3, 
+        energyLevel: 2, 
+        date: new Date() 
+      },
+      { userId: users[3]._id, 
+        subjectId: subjects[3]._id, 
+        goal:"Solve matrix practice problems",
+        duration: 120, 
+        focusLevel: 5, 
+        energyLevel: 5, 
+        date: new Date() 
+      },
+      { userId: users[4]._id, 
+        subjectId: subjects[4]._id, 
+        goal:"Build React component layout",
+        duration: 30, 
+        focusLevel: 2, 
+        energyLevel: 2, 
+        date: new Date() 
+      }
     ]);
 
     console.log("Seed data inserted!");

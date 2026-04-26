@@ -2,6 +2,7 @@ function SessionRow({ session, onDelete, onEdit }) {
   return (
     <tr>
       <td>{session.subjectId}</td>
+      <td>{session.goal}</td>
       <td>{session.duration}</td>
       <td>{session.focusLevel}</td>
       <td>{session.energyLevel}</td>

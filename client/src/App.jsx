@@ -65,11 +65,12 @@ function App() {
 };
 
 const handleEditSession = async (session) => {
+  const newGoal = prompt("Enter new goal:", session.goal);
   const newDuration = prompt("Enter new duration:", session.duration);
   const newFocusLevel = prompt("Enter new focus level:", session.focusLevel);
   const newEnergyLevel = prompt("Enter new energy level:", session.energyLevel);
 
-  if (!newDuration || !newFocusLevel || !newEnergyLevel) {
+  if ( !newGoal || !newDuration || !newFocusLevel || !newEnergyLevel) {
     return;
   }
 
@@ -80,6 +81,7 @@ const handleEditSession = async (session) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        goal: newGoal,
         duration: Number(newDuration),
         focusLevel: Number(newFocusLevel),
         energyLevel: Number(newEnergyLevel),

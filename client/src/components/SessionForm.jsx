@@ -4,6 +4,7 @@ function SessionForm({ onSessionCreated }) {
   const [formData, setFormData] = useState({
     userId: "",
     subjectId: "",
+    goal: "",
     duration: "",
     focusLevel: "",
     energyLevel: "",
@@ -47,6 +48,7 @@ function SessionForm({ onSessionCreated }) {
       setFormData({
         userId: "",
         subjectId: "",
+        goal: "",
         duration: "",
         focusLevel: "",
         energyLevel: "",
@@ -75,6 +77,14 @@ function SessionForm({ onSessionCreated }) {
         placeholder="Subject ID"
         value={formData.subjectId}
         onChange={handleChange}
+      />
+
+      <input 
+      type="text"
+      name="goal"
+      placeholder="Session Goal"
+      value={formData.goal}
+      onChange={handleChange}     
       />
 
       <input

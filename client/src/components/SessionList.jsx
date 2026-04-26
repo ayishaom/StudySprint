@@ -9,6 +9,7 @@ function SessionList({ sessions, onDelete, onEdit}) {
         <thead>
           <tr>
             <th>Subject ID</th>
+            <th>Goal</th>
             <th>Duration</th>
             <th>Focus</th>
             <th>Energy</th>

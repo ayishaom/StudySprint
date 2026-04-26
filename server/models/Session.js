@@ -12,6 +12,13 @@ const sessionSchema = new mongoose.Schema(
       ref: "Subject",
       required: [true, "Subject ID is required"],
     },
+
+    goal: {
+      type: String,
+      required: [true, "Session goal is required"],
+      trim: true,
+    },
+
     duration: {
       type: Number,
       required: [true, "Duration is required"],
