@@ -6,6 +6,7 @@ function App() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [focusFilter, setFocusFilter] = useState("")
 
  useEffect(() => {
   const fetchSessions = async () => {
@@ -101,6 +102,10 @@ const handleEditSession = async (session) => {
   }
 };
 
+const filteredSessions = focusFilter
+? sessions.filter((session) => session.focusLevel === Number(focusFilter))
+: sessions;
+
   return (
   <div>
     <h1>StudySprint</h1>
@@ -109,9 +114,25 @@ const handleEditSession = async (session) => {
     {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
     <SessionForm onSessionCreated={handleSessionCreated} />
+    <div>
+      <label>
+        Filter by focus level: {" "}
+        <select 
+        value={focusFilter}
+        onChange={(e) => setFocusFilter(e.target.value)}
+        >
+          <option value="">All</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </label>
+    </div>
 
     <SessionList
-      sessions={sessions}
+      sessions={filteredSessions}
       onDelete={handleDeleteSession}
       onEdit={handleEditSession}
     />
