@@ -73,6 +73,18 @@ const getPopulatedSession = async (req,res) =>{
   }
 }
 
+const getSessionsBySubject = async (req, res) => {
+  try {
+    const sessions = await Session.find({
+      subjectId: req.params.subjectId
+    }).populate("subjectId", "name");
+
+    res.json(sessions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 module.exports = {
   createSession,
@@ -80,4 +92,5 @@ module.exports = {
   updateSession,
   deleteSession,
   getPopulatedSession,
+  getSessionsBySubject,
 };
